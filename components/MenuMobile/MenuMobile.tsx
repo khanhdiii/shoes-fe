@@ -8,13 +8,12 @@ const data = [
   { id: 4, name: 'Contact', url: '/contact' },
 ];
 
-const subMenuData = [
-  { id: 1, name: 'Jordan', doc_count: 11 },
-  { id: 2, name: 'Sneakers', doc_count: 8 },
-  { id: 3, name: 'Running shoes', doc_count: 64 },
-  { id: 4, name: 'Football shoes', doc_count: 107 },
-];
-function MenuMobile({ showCatMenu, setShowCatMenu, setMobileMenu }: any) {
+function MenuMobile({
+  showCatMenu,
+  setShowCatMenu,
+  setMobileMenu,
+  categories,
+}: any) {
   return (
     <ul className="flex flex-col md:hidden font-bold absolute top-[50px] left-0 w-full h-[calc(100vh-50px)] bg-white border-t text-black">
       {data?.map?.((item) => {
@@ -31,19 +30,21 @@ function MenuMobile({ showCatMenu, setShowCatMenu, setMobileMenu }: any) {
                 </div>
                 {showCatMenu && (
                   <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
-                    {subMenuData?.map((subMenu) => {
+                    {categories?.map((category: any) => {
                       return (
                         <Link
-                          key={subMenu?.id}
-                          href="/"
+                          key={category?.id}
+                          href={`/category/${category?.attributes?.slug}`}
                           onClick={() => {
                             setMobileMenu(false);
                             setShowCatMenu(false);
                           }}
                         >
                           <li className="py-4 px-8 border-t flex justify-between">
-                            {subMenu?.name}
-                            <span className="opacity-50 text-sm">12</span>
+                            {category?.attributes?.name}
+                            <span className="opacity-50 text-sm">
+                              {category?.attributes?.products?.data.length}
+                            </span>
                           </li>
                         </Link>
                       );
