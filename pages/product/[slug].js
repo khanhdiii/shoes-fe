@@ -4,8 +4,11 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
 import ProductDetailCarousel from '@/components/ProductDetailCarousel/ProductDetailCarousel';
 import { IoMdHeartEmpty } from 'react-icons/io';
+import { fetchDataApi } from '@/utils/api';
 
-const Product = () => {
+const Product = ({product, products}) => {
+
+  const p = product?.data?.[0]?.attributes;
   return (
     <div className="w-full md:py-20">
       <Wrapper>
@@ -99,3 +102,33 @@ const Product = () => {
   );
 };
 export default Product;
+
+export async function getStaticPaths() {
+  const products = await fetchDataApi("/api/products?populate=*");
+  const paths = products?.data?.map((p) => ({
+      params: {
+          slug: p.attributes.slug,
+      },
+  }));
+
+  return {
+      paths,
+      fallback: false,
+  };
+}
+
+export async function getStaticProps({ params: { slug } }) {
+  const product = await fetchDataApi(
+      `/api/products?populate=*&filters[slug][$eq]=${slug}`
+  );
+  const products = await fetchDataApi(
+      `/api/products?populate=*&[filters][slug][$ne]=${slug}`
+  );
+
+  return {
+      props: {
+          product,
+          products,
+      },
+  };
+}
