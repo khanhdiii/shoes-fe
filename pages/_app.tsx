@@ -3,6 +3,8 @@ import Footer from 'pages/footer';
 import Header from 'pages/header';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Provider } from 'react-redux';
+import store from '@/store/store';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -25,9 +27,11 @@ export default function App({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         />
       </Head>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <Provider store={store}>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </Provider>
     </>
   );
 }
