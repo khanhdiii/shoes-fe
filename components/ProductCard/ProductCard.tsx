@@ -6,7 +6,7 @@ import React from 'react';
 function ProductCard({ data: { attributes: params, id } }: any) {
   return (
     <Link
-      href={`product/${params?.slug}`}
+      href={`/product/${params?.slug}`}
       className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer"
     >
       <Image

@@ -123,12 +123,10 @@ const Product = ({ product, products }) => {
                       behavior: 'smooth',
                     });
                   } else {
-                    const id = `${product?.data?.[0]?.id}`;
                     dispatch(
                       addToCart({
                         ...product?.data?.[0],
                         selectedSize,
-                        id,
                         oneQuantityPrice: p.price,
                       }),
                     );
