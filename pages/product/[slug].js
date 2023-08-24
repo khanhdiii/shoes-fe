@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import ProductCard from '@/components/ProductCard/ProductCard';
-import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
-import ProductDetailCarousel from '@/components/ProductDetailCarousel/ProductDetailCarousel';
-import { IoMdHeartEmpty } from 'react-icons/io';
-import { fetchDataApi } from '@/utils/api';
-import { getDiscountPricePercent } from '@/utils/helper';
-import ReactMarkdown from 'react-markdown';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '@/store/cartSlice';
+import ReactMarkdown from 'react-markdown';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Wrapper from '@/components/Wrapper/Wrapper';
+import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
+import ProductDetailCarousel from '@/components/ProductDetailCarousel/ProductDetailCarousel';
+
+import { fetchDataApi } from '@/utils/api';
+import { getDiscountPricePercent } from '@/utils/helper';
+import { addToCart } from '@/store/cartSlice';
+
+import { IoMdHeartEmpty } from 'react-icons/io';
 
 const Product = ({ product, products }) => {
+  const dispatch = useDispatch();
+
   const p = product?.data?.[0]?.attributes;
 
   const [selectedSize, setSelectedSize] = useState();
   const [showError, setShowError] = useState(false);
-
-  const dispatch = useDispatch();
 
   const notify = () => {
     toast.success('Add to cart is successfully!', {

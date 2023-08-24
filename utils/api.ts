@@ -13,7 +13,7 @@ export const fetchDataApi = async (endpoint: any) => {
   return data;
 };
 
-export const makePaymentRequest = async (endpoint, payload) => {
+export const makePaymentRequest = async (endpoint: any, payload: any) => {
   const res = await fetch(`${API_URL}${endpoint}`, {
     method: 'POST',
     headers: {

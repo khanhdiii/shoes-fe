@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import ProductCard from '@/components/ProductCard/ProductCard';
-import { fetchDataApi } from '@/utils/api';
+import Image from 'next/image';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Wrapper from '@/components/Wrapper/Wrapper';
+import ProductCard from '@/components/ProductCard/ProductCard';
+
+import { fetchDataApi } from '@/utils/api';
 
 const maxResult = 3;
 
 const Category = ({ category, products, slug }) => {
-  const { query } = useRouter();
-  const [pageIndex, setPageIndex] = useState(1);
-  const { data, error, isLoading } = useSWR(
+  const { data, isLoading } = useSWR(
     `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&pagination[page]=${pageIndex}&pagination[pageSize]=${maxResult}`,
     fetchDataApi,
     {
       fallbackData: products,
     },
   );
+
+  const { query } = useRouter();
+  const [pageIndex, setPageIndex] = useState(1);
 
   useEffect(() => {
     setPageIndex(1);
@@ -30,7 +32,7 @@ const Category = ({ category, products, slug }) => {
           {category?.data[0]?.attributes?.name}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
-          {data.length==0 ? (
+          {data.length == 0 ? (
             <Image
               className="col-span-3 flex justify-center items-center"
               src="/img/empty-cart.jpg"

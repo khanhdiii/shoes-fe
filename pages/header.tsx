@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import Menu from '@/components/Menu/Menu';
+import MenuMobile from '@/components/MenuMobile/MenuMobile';
+
+import { fetchDataApi } from '@/utils/api';
+
 import { BsCart, BsHeart } from 'react-icons/bs';
 import { CgMenuRight } from 'react-icons/cg';
 import { VscChromeClose } from 'react-icons/vsc';
-import MenuMobile from '@/components/MenuMobile/MenuMobile';
-import { fetchDataApi } from '@/utils/api';
-import { useSelector } from 'react-redux';
 
 function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -16,7 +18,7 @@ function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState(null);
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: any) => state.cart);
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {

@@ -1,12 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+interface CartItem {
+  id: string;
+  quantity: number;
+  price: number;
+  oneQuantityPrice: number;
+  attributes: any;
+}
+
+interface CartState {
+  cartItems: CartItem[];
+}
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartItems: [],
-  },
+  } as CartState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state, action: PayloadAction<CartItem>) => {
       const item = state.cartItems.find((p) => p.id === action.payload.id);
       if (item) {
         item.quantity++;

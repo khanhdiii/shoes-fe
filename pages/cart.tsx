@@ -3,34 +3,45 @@ import Wrapper from '@/components/Wrapper/Wrapper';
 import CartItem from '@/components/CartItem/CartItem';
 import Image from 'next/image';
 import Link from 'next/link';
+import { message } from 'antd';
 import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import { makePaymentRequest } from '@/utils/api';
-
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
 );
 function Cart() {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: any) => state.cart);
   const [loading, setLoading] = useState(false);
 
   const subTotal = useMemo(() => {
-    return cartItems.reduce((total, val) => total + val.attributes.price, 0);
+    return cartItems.reduce(
+      (total: any, val: any) => total + val.attributes.price,
+      0,
+    );
   }, [cartItems]);
 
   const handlePayment = async () => {
     try {
       setLoading(true);
       const stripe = await stripePromise;
+
+      if (!stripe) {
+        // Stripe is not available, handle the case
+        setLoading(false);
+        return;
+      }
+
       const res = await makePaymentRequest('/api/orders', {
         products: cartItems,
       });
+
       await stripe.redirectToCheckout({
         sessionId: res.stripeSession.id,
       });
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
-      console.log(error);
+      message.error(error);
     }
   };
   return (
@@ -50,7 +61,7 @@ function Cart() {
               {/* CART ITEMS START */}
               <div className="flex-[2]">
                 <div className="text-lg font-bold">Cart Items</div>
-                {cartItems.map((item) => (
+                {cartItems.map((item: any) => (
                   <CartItem key={item.id} data={item} />
                 ))}
               </div>

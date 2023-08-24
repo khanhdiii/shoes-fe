@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
+
 const data = [
   { id: 1, name: 'Home', url: '/' },
   { id: 2, name: 'About', url: '/about' },
@@ -44,7 +45,7 @@ function Menu({ showCatMenu, setShowCatMenu, categories }: any) {
               </li>
             ) : (
               <li className="cursor-pointer">
-                <Link href={item?.url}>{item?.name}</Link>
+                {item?.url && <Link href={item.url}>{item.name}</Link>}
               </li>
             )}
           </React.Fragment>

@@ -3,7 +3,7 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { fetchDataApi } from '@/utils/api';
 
-export default function Home({ products }) {
+export default function Home({ products }: any) {
   return (
     <main>
       <Banner />
