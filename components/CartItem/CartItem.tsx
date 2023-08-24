@@ -8,7 +8,7 @@ function CartItem({ data }: any) {
   const p = data.attributes;
   const dispatch = useDispatch();
 
-  const updateCartItem = (e, key) => {
+  const updateCartItem = (e: any, key: any) => {
     const payload = {
       key,
       val: key === 'quantity' ? parseInt(e.target.value) : e.target.value,
