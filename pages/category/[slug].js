@@ -10,6 +10,8 @@ import { fetchDataApi } from '@/utils/api';
 const maxResult = 3;
 
 const Category = ({ category, products, slug }) => {
+  const { query } = useRouter();
+  const [pageIndex, setPageIndex] = useState(1);
   const { data, isLoading } = useSWR(
     `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&pagination[page]=${pageIndex}&pagination[pageSize]=${maxResult}`,
     fetchDataApi,
@@ -18,8 +20,6 @@ const Category = ({ category, products, slug }) => {
     },
   );
 
-  const { query } = useRouter();
-  const [pageIndex, setPageIndex] = useState(1);
 
   useEffect(() => {
     setPageIndex(1);
