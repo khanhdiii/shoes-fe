@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-function ProductCard({ data: { attributes: params, id } }: any) {
+function ProductCard({ data: { attributes: params } }: any) {
   return (
     <Link
       href={`/product/${params?.slug}`}
