@@ -1,4 +1,4 @@
-import { auth } from '@/firebase';
+import { auth } from '@/firebase/firebase';
 import { message } from 'antd';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useRouter } from 'next/router';
