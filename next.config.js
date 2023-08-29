@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   eslint: { ignoreDuringBuilds: true },
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['rb.gy', 'res.cloudinary.com'],
   },
   experimental: {
     staticPageGenerationTimeout: 60000,

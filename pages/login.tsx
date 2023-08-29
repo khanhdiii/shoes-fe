@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import useAuth from '@/hooks/useAuth';
-import { message } from 'antd';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { auth } from '@/firebase';
+import { Form, Input, message, Row, Col, Spin } from 'antd';
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -15,40 +12,27 @@ import {
 import github from '@/public/icon/Github.png';
 import google from '@/public/icon/Google.webp';
 import facebook from '@/public/icon/Facebook.png';
-
-interface Inputs {
-  email: string;
-  password: string;
-}
+import useAuth from '@/hooks/useAuth';
+import { auth } from '@/firebase/firebase';
 
 function Login() {
   const [login, setLogin] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const [formLogin] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   const { signIn } = useAuth();
 
-  const emailValidationPattern =
-    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<Inputs> = async ({
-    email,
-    password,
-  }: Inputs) => {
+  const onFinish = async (values: any) => {
     try {
-      if (login) {
-        await signIn(email, password);
-        message.success('Login successful');
-      } else {
-        // Handle login false case?
-      }
+      setLoading(true);
+      await signIn(values?.email, values?.password);
+      message.success('Login successful');
+      setLogin(true);
     } catch (error) {
-      message.error('Login failed');
+      message.error('Email or password is not valid');
     }
   };
 
@@ -105,128 +89,138 @@ function Login() {
     }
   };
 
+  useEffect(() => {
+    if (login) router.push('/');
+  }, [login]);
+
   return (
-    <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
+    <div className="relative flex h-screen w-screen flex-col md:items-center md:justify-center md:bg-transparent">
       <Head>
-        <title>Home - NetFlix</title>
+        <title>Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image
         alt=""
-        src="https://rb.gy/p2hphi"
+        src="/img/background.jpeg"
         layout="fill"
         className="-z-10 !hidden opacity-60 sm:!inline"
         objectFit="cover"
       />
-      <img
-        src="https://rb.gy/ulxxee"
-        className="absolute left-4 top-4 cursor-pointer object-contain md:left-10 md:top-6"
-        width={150}
-        height={150}
-      />
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0 md:max-w-md md:px-14"
-      >
-        <h1 className="text-4xl font-semibold">Sign in</h1>
-        <div className="space-y-4">
-          <label className="inline-block w-full">
-            <input
-              type="text"
-              placeholder="Email"
-              className="input"
-              {...register('email', {
-                required: true,
-                pattern: emailValidationPattern,
-              })}
-            />
-            {errors?.email && (
-              <p className="p-1 text-[13px] font-light text-orange-500">
-                Please enter valid email
-              </p>
-            )}
-          </label>
-          <label className="inline-block w-full">
-            <input
-              type="password"
-              placeholder="Password"
-              className="input"
-              {...register('password', {
-                required: true,
-                minLength: 6,
-                maxLength: 40,
-              })}
-            />
-            {errors?.password && (
-              <p className="p-1 text-[13px] font-light text-orange-500">
-                Your password must contain between 6 and 40 characters
-              </p>
-            )}
-          </label>
-        </div>
-        <div>
-          <button
-            className="w-full rounded bg-[#e50914] py-3 font-semibold capitalize mb-2"
-            onClick={() => setLogin(true)}
-          >
-            Sign In
-          </button>
-
-          <label className="mb-2">
-            <div className="text-sm">
-              <div
-                onClick={() => router.push('/forgot-password')}
-                className="cursor-pointer font-medium text-lg text-white hover:text-indigo-300"
+      <Row justify="center">
+        <Col xs={24} sm={24} md={24} lg={24}>
+          <Spin spinning={loading}>
+            <Form
+              layout="vertical"
+              form={formLogin}
+              name="login"
+              onFinish={onFinish}
+              className="form-register relative space-y-4 rounded bg-white py-10 w-[500px] px-20"
+            >
+              <h1 className="text-4xl font-semibold text-center text-black mb-10">
+                Login
+              </h1>
+              <Form.Item
+                className="inline-block w-full text-white"
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Email!',
+                  },
+                  {
+                    type: 'email',
+                    message: 'Please input a valid email!',
+                  },
+                ]}
               >
-                Forgot password?
-              </div>
-            </div>
-          </label>
-          <h3 className="flex justify-center mt-2 mb-2 text-lg font-medium text-gray-300">
-            Or Login With
-          </h3>
-          <div className="flex justify-center">
-            <div className="flex justify-around items-center bg-white w-3/6 rounded-md">
-              <Image
-                width={30}
-                height={30}
-                className=" rounded bg-transparent py-3 font-semibold capitalize cursor-pointer border-black"
-                onClick={() => signInWithGoogle()}
-                src={google}
-                alt="google"
-              />
-              <Image
-                width={30}
-                height={30}
-                className=" rounded bg-white py-3 font-semibold capitalize cursor-pointer"
-                onClick={() => signInWithGithub()}
-                src={github}
-                alt="github"
-              />
-              <Image
-                width={30}
-                height={30}
-                className=" rounded bg-white py-3 font-semibold capitalize cursor-pointer"
-                onClick={() => signInWithFacebook()}
-                src={facebook}
-                alt="facebook"
-              />
-            </div>
-          </div>
-        </div>
+                <Input className="custom-input" />
+              </Form.Item>
 
-        <div className="text-[gray]">
-          New to Netflix?{' '}
-          <button
-            type="submit"
-            className="text-white hover:underline"
-            onClick={() => router.push('/register')}
-          >
-            Sign up now
-          </button>
-        </div>
-      </form>
+              <Form.Item
+                className="inline-block w-full"
+                name="password"
+                label="Password"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                  {
+                    min: 6,
+                    max: 30,
+                    message: 'Please input between 6-30 characters',
+                  },
+                ]}
+              >
+                <Input.Password className="custom-input" />
+              </Form.Item>
+              <div>
+                <button
+                  className="w-full rounded bg-black text-white py-2 mt-1 mb-1 font-medium capitalize"
+                  onClick={() => formLogin.submit()}
+                >
+                  Sign In
+                </button>
+
+                <label className="mb-1">
+                  <div className="text-sm">
+                    <div
+                      onClick={() => router.push('/forgot-password')}
+                      className="cursor-pointer font-normal text-lg text-black hover:text-blue-500"
+                    >
+                      Forgot password?
+                    </div>
+                  </div>
+                </label>
+                <h3 className="flex justify-center my-1 text-lg font-medium text-gray-300">
+                  Or Login With
+                </h3>
+                <div className="flex justify-center">
+                  <div className="flex justify-around items-center bg-white w-3/6 rounded-md">
+                    <Image
+                      width={30}
+                      height={30}
+                      className=" rounded bg-transparent py-3 font-semibold capitalize cursor-pointer border-black"
+                      onClick={() => signInWithGoogle()}
+                      src={google}
+                      alt="google"
+                    />
+                    <Image
+                      width={30}
+                      height={30}
+                      className=" rounded bg-white py-3 font-semibold capitalize cursor-pointer"
+                      onClick={() => signInWithGithub()}
+                      src={github}
+                      alt="github"
+                    />
+                    <Image
+                      width={30}
+                      height={30}
+                      className=" rounded bg-white py-3 font-semibold capitalize cursor-pointer"
+                      onClick={() => signInWithFacebook()}
+                      src={facebook}
+                      alt="facebook"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-[gray]">
+                New a Account?{' '}
+                <button
+                  type="submit"
+                  className="text-black font-semibold hover:underline"
+                  onClick={() => router.push('/register')}
+                >
+                  Sign up now
+                </button>
+              </div>
+            </Form>
+          </Spin>
+        </Col>
+      </Row>
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import { auth } from '@/firebase';
+import { auth } from '@/firebase/firebase';
 import useAuth from '@/hooks/useAuth';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
-import { Form, Input, message, Row, Col, Button, Spin } from 'antd';
+import { Form, Input, message, Row, Col, Spin } from 'antd';
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -41,16 +41,12 @@ function Register() {
         message.success(
           'Account registered successfully! Please check your email for verification. And back to login',
         );
+        setLoading(false);
+        router.push('/login');
       }
     } catch (error: any) {
       setLoading(false);
       message.error(error.message);
-    }
-  };
-
-  const handleRouter = () => {
-    {
-      router.push('/login');
     }
   };
 
@@ -61,24 +57,17 @@ function Register() {
   }, [user, router]);
 
   return (
-    <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
+    <div className="relative flex h-screen w-screen flex-col md:items-center md:justify-center md:bg-transparent">
       <Head>
-        <title>Register - NetFlix</title>
+        <title>Register</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image
         alt=""
-        src="https://rb.gy/p2hphi"
+        src="/img/background.jpeg"
         layout="fill"
         className="-z-10 !hidden opacity-60 sm:!inline"
         objectFit="cover"
-      />
-      <img
-        src="https://rb.gy/ulxxee"
-        className="absolute left-4 top-4 cursor-pointer object-contain md:left-10 md:top-6"
-        width={150}
-        height={150}
-        onClick={handleRouter}
       />
       <Row justify="center">
         <Col xs={24} sm={24} md={24} lg={24}>
@@ -88,15 +77,15 @@ function Register() {
               form={formRegister}
               name="register"
               onFinish={onFinish}
-              className="form-register relative mt-24 space-y-4 rounded bg-black/75 py-10 w-500 px-20"
+              className="form-register relative space-y-4 rounded bg-white py-10 w-[500px] px-20"
             >
-              <h1 className="text-4xl font-semibold text-center text-white mb-10">
+              <h1 className="text-4xl font-semibold text-center text-black mb-10">
                 Register
               </h1>
-              <span className="text-white text-xl">Email</span>{' '}
-              <span className="text-red-700">*</span>
+
               <Form.Item
                 className="inline-block w-full text-white"
+                label="Email"
                 name="email"
                 rules={[
                   {
@@ -111,11 +100,11 @@ function Register() {
               >
                 <Input className="custom-input" />
               </Form.Item>
-              <span className="text-white text-xl">Password</span>{' '}
-              <span className="text-red-700">*</span>
+
               <Form.Item
                 className="inline-block w-full"
                 name="password"
+                label="Password"
                 rules={[
                   {
                     required: true,
@@ -130,10 +119,10 @@ function Register() {
               >
                 <Input.Password className="custom-input" />
               </Form.Item>
-              <span className="text-white text-xl">Confirm Password</span>{' '}
-              <span className="text-red-700">*</span>
+
               <Form.Item
                 name="confirm"
+                label="Confirm Password"
                 dependencies={['password']}
                 hasFeedback
                 rules={[
@@ -158,19 +147,17 @@ function Register() {
                 <Input.Password className="custom-input" />
               </Form.Item>
               <div>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="flex w-full h-10 rounded bg-[#e50914] py-3 font-semibold capitalize justify-center items-center !hover:bg-black mt-10"
+                <button
+                  className="w-full rounded bg-black text-white py-1 mt-2 mb-1 font-medium capitalize"
                   disabled={loading}
                 >
                   <p className="justify-center items-center text-lg">
                     {loading ? 'Registering...' : 'Register'}
                   </p>
-                </Button>
+                </button>
               </div>
-              <div className="flex flex-row py-3 font-semibold capitalize justify-start items-center text-red-500 text-lg hover:text-white">
-                <ArrowLeftIcon className="left-icon" />{' '}
+              <div className="flex flex-row py-3 font-normal capitalize justify-start items-center text-black text-lg hover:text-blue-500">
+                <ArrowLeftIcon className="left-icon w-5 mx-3" />
                 <button onClick={() => router.push('/login')}>
                   Back to login
                 </button>
