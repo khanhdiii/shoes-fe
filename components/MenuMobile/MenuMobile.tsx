@@ -1,4 +1,6 @@
+import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
@@ -7,6 +9,7 @@ const data = [
   { id: 2, name: 'About', url: '/about' },
   { id: 3, name: 'Categories', subMenu: true },
   { id: 4, name: 'Contact', url: '/contact' },
+  { id: 5, name: 'Logout' },
 ];
 
 function MenuMobile({
@@ -15,6 +18,13 @@ function MenuMobile({
   setMobileMenu,
   categories,
 }: any) {
+  const { logOut } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logOut();
+    router.push('/'); // Redirect to home page after logout
+  };
   return (
     <ul className="flex flex-col md:hidden font-bold absolute top-[50px] left-0 w-full h-[calc(100vh-50px)] bg-white border-t text-black">
       {data?.map?.((item) => {
@@ -55,12 +65,16 @@ function MenuMobile({
               </li>
             ) : (
               <li className="py-4 px-5 border-b ">
-                <Link
-                  href={item?.url || ''}
-                  onClick={() => setMobileMenu(false)}
-                >
-                  {item?.name}
-                </Link>
+                {item?.name === 'Logout' ? (
+                  <button onClick={handleLogout}>{item.name}</button>
+                ) : (
+                  <Link
+                    href={item?.url || ''}
+                    onClick={() => setMobileMenu(false)}
+                  >
+                    {item?.name}
+                  </Link>
+                )}
               </li>
             )}
           </React.Fragment>

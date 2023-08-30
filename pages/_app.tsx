@@ -6,6 +6,7 @@ import store from '@/store/store';
 import '/styles/globals.css';
 import Header from './header';
 import Footer from './footer';
+import { AuthProvider } from '@/hooks/useAuth';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -29,9 +30,11 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Provider store={store}>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+        </AuthProvider>
       </Provider>
     </>
   );
