@@ -5,24 +5,24 @@ import { BiArrowBack } from 'react-icons/bi';
 
 function Banner() {
   return (
-    <div className="relative text-white text-[20px] w-full max-w-[1360px] mx-auto">
+    <div className="relative text-white text-[20px] w-full max-w-[1060px] mx-auto">
       <Carousel
         autoPlay
         infiniteLoop
         showThumbs={false}
-        renderArrowPrev={(clickHandler, hasPrev) => (
+        renderArrowPrev={(clickHandler) => (
           <div
             onClick={clickHandler}
-            className="absolute right-[31px] md:right-[51px] bottom-0 w-[30px]
+            className="absolute rounded-md right-[31px] md:right-[51px] bottom-0 w-[30px]
         md:w-[50px] h-[30px] md:h-[50px] bg-black z-10 flex items-center justify-center cursor-pointer hover:opacity-90"
           >
             <BiArrowBack className="text-sm md:text-lg text-white" />
           </div>
         )}
-        renderArrowNext={(clickHandler, hasNext) => (
+        renderArrowNext={(clickHandler) => (
           <div
             onClick={clickHandler}
-            className="absolute right-0 bottom-0 w-[30px]
+            className="absolute rounded-md right-0 bottom-0 w-[30px]
         md:w-[50px] h-[30px] md:h-[50px] bg-black z-10 flex items-center justify-center cursor-pointer hover:opacity-90"
           >
             <BiArrowBack className="rotate-180 text-sm md:text-lg text-white" />

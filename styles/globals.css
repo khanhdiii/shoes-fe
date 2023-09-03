@@ -108,3 +108,9 @@
 .markdown ul li {
     margin: 10px 0;
 }
+
+
+/* about */
+.transition-opacity {
+    transition: opacity 1.5s ease-in-out;
+  }

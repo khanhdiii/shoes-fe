@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import Menu from '@/components/Menu/Menu';
 import MenuMobile from '@/components/MenuMobile/MenuMobile';
+import UserProfile from '@/components/UserProfile/UserProfile';
 
 import { fetchDataApi } from '@/utils/api';
 
-import { BsCart, BsHeart } from 'react-icons/bs';
-import { AiOutlineUser } from 'react-icons/ai';
+import { BsCart } from 'react-icons/bs';
 import { CgMenuRight } from 'react-icons/cg';
+
 import { VscChromeClose } from 'react-icons/vsc';
-import UserProfile from '@/components/UserProfile/UserProfile';
 
 function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -59,7 +59,6 @@ function Header() {
         <Link href="/" onClick={() => setShowCatMenu(false)}>
           <img src="/img/logo.svg" className="w-[40px] md:w-[60px]" alt="" />
         </Link>
-
         <Menu
           showCatMenu={showCatMenu}
           setShowCatMenu={setShowCatMenu}
@@ -81,6 +80,7 @@ function Header() {
               15
             </div>
           </div> */}
+
           <Link href="/cart">
             <div className="w-8 md:h-12 h-8 md:w-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
               <BsCart className="text-[15px] md:text-[20px]" />
@@ -91,8 +91,9 @@ function Header() {
               )}
             </div>
           </Link>
-            <UserProfile />
-          <div className="w-8 md:h-12 h-8 md:w-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+
+          <UserProfile />
+          <div className="w-8 md:h-12 h-8 md:w-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative sm:text-sm md:text-md lg:text-md">
             {mobileMenu ? (
               <VscChromeClose
                 className="text-[16px]"
