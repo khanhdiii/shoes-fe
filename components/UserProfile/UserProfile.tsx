@@ -1,10 +1,10 @@
 import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import useAuth from '@/hooks/useAuth';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Menu, Space } from 'antd';
 import Link from 'next/link';
+import useAuth from '../../hooks/useAuth';
 
 function UserProfile() {
   const { user, logOut } = useAuth();

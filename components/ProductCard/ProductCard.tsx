@@ -1,7 +1,7 @@
-import { getDiscountPricePercent } from '@/utils/helper';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { getDiscountPricePercent } from '../../utils/helper';
 
 function ProductCard({ data: { attributes: params } }: any) {
   return (
