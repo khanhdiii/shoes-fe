@@ -15,7 +15,7 @@ function UserProfile() {
     router.push('/'); // Redirect to home page after logout
   };
 
-  const items: MenuProps['items'] = [
+  const items: any = [
     {
       label: 'Profile',
       key: '1',
