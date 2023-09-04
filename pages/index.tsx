@@ -15,6 +15,7 @@ export default function Home({ products }: any) {
 
   const [selectedCategory, setSelectedCategory] = useState('All products');
   const [selectedPriceRange, setSelectedPriceRange] = useState(1);
+  const [selectedSexRange, setSelectedSexRange] = useState(1);
   const [filterType, setFilterType] = useState('category');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,6 +32,11 @@ export default function Home({ products }: any) {
   const filterByPriceRange = (priceRange: number) => {
     setSelectedPriceRange(priceRange);
     setFilterType('price');
+  };
+
+  const filterBySex = (sexRange: number) => {
+    setSelectedSexRange(sexRange);
+    setFilterType('sex');
   };
 
   const filteredProducts = products.data.filter((product: any) => {
@@ -111,6 +117,27 @@ export default function Home({ products }: any) {
       return true; // Nếu loại lọc không phải là 'price', hiển thị tất cả sản phẩm
     }
   });
+
+  const filteredProductsBySex = filteredProducts.filter((product: any) => {
+    if (filterType === 'sex') {
+      // Chỉ áp dụng lọc theo giá nếu loại lọc là 'sex'
+      switch (selectedSexRange) {
+        case 1: // Tất cả gioi tinh
+          return true;
+        case 2: // Unisex
+          return product.attributes.subtitle == `Unisex`;
+        case 3: // Men
+          return product.attributes.subtitle == `Men's Shoes`;
+        case 4: // Women
+          return product.attributes.subtitle == `Women's Shoes`;
+        default:
+          return true; // Nếu không có phạm vi giá nào được chọn, hiển thị tất cả sản phẩm
+      }
+    } else {
+      return true; // Nếu loại lọc không phải là 'price', hiển thị tất cả sản phẩm
+    }
+  });
+
   useEffect(() => {
     // Update windowWidth whenever the window is resized
     const handleResize = () => {
@@ -128,7 +155,10 @@ export default function Home({ products }: any) {
   return (
     <main>
       {windowWidth >= 1350 ? (
-        <SideBarMenu filterByPriceRange={filterByPriceRange} />
+        <SideBarMenu
+          filterByPriceRange={filterByPriceRange}
+          filterBySex={filterBySex}
+        />
       ) : (
         ''
       )}
@@ -165,6 +195,10 @@ export default function Home({ products }: any) {
 
             {filterType === 'price' &&
               filteredProductsByPrice.map((product: any) => (
+                <ProductCard key={product.id} data={product} />
+              ))}
+            {filterType === 'sex' &&
+              filteredProductsBySex.map((product: any) => (
                 <ProductCard key={product.id} data={product} />
               ))}
           </div>

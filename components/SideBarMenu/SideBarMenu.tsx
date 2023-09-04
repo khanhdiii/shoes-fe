@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Category from '../Sidebar/Category/Category';
 import Price from '../Sidebar/Price/Price';
 import { Button, Menu } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import Sex from '../Sidebar/Sex/Sex';
 
-function SideBarMenu({ filterByPriceRange }: any) {
-  const [selectedMenuItem, setSelectedMenuItem] = useState('category');
+function SideBarMenu({ filterByPriceRange, filterBySex }: any) {
+  const [selectedMenuItem, setSelectedMenuItem] = useState('sex');
 
   const handleMenuClick = (e: any) => {
     setSelectedMenuItem(e.key);
@@ -26,16 +26,17 @@ function SideBarMenu({ filterByPriceRange }: any) {
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
-        mode="horizontal"
+        mode="vertical"
         // theme="dark"
         inlineCollapsed={collapsed}
         selectedKeys={[selectedMenuItem]}
         onClick={handleMenuClick}
       >
-        <Menu.Item key="category">Category</Menu.Item>
+        <Menu.Item key="sex">Sex</Menu.Item>
         <Menu.Item key="price">Price</Menu.Item>
       </Menu>
-      {selectedMenuItem === 'category' && <Category />}
+      {/* {selectedMenuItem === 'sex' && <Category />} */}
+      {selectedMenuItem === 'sex' && <Sex filterBySex={filterBySex} />}
       {selectedMenuItem === 'price' && (
         <Price filterByPriceRange={filterByPriceRange} />
       )}
