@@ -13,9 +13,9 @@ import {
 import { auth } from '../firebase/firebase';
 import useAuth from '../hooks/useAuth';
 
-import github from '@/public/icon/Github.png';
-import google from '@/public/icon/Google.webp';
-import facebook from '@/public/icon/Facebook.png';
+import github from '../public/icon/Github.png';
+import google from '../public/icon/Google.webp';
+import facebook from '../public/icon/Facebook.png';
 
 function Login() {
   const [login, setLogin] = useState(false);
