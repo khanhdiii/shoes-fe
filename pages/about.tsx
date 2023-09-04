@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -113,7 +114,7 @@ const About: React.FC = () => {
                 </div>
                 <div className="relative w-5/12">
                   <img
-                     className={`w-full transition-opacity ${
+                    className={`w-full transition-opacity ${
                       activeSection !== section.id ? 'opacity-0' : 'opacity-100'
                     }`}
                     src="/img/thumb/nike-thumb-1.webp"
@@ -136,7 +137,7 @@ const About: React.FC = () => {
             <div className="flex flex-col justify-center items-center">
               <div className="flex justify-center items-center text-black">
                 <div className="relative w-10/12 h-full flex my-10">
-                  <img
+                  <Image
                     className={`w-full justify-center items-center transition-opacity ${
                       activeSection !== section.id ? 'opacity-0' : 'opacity-100'
                     }`}
@@ -208,7 +209,7 @@ const About: React.FC = () => {
               <div className="flex flex-col justify-center items-center gap-1">
                 <div className="relative w-10/12 ">
                   <img
-                     className={`w-full transition-opacity ${
+                    className={`w-full transition-opacity ${
                       activeSection !== section.id ? 'opacity-0' : 'opacity-100'
                     }`}
                     src="/img/thumb/vans-thumb.jpg"
