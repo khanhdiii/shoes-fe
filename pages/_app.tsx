@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
-import store from '@/store/store';
 
 import '/styles/globals.css';
 import Header from './header';
 import Footer from './footer';
-import { AuthProvider } from '@/hooks/useAuth';
+import store from '../store/store';
+import { AuthProvider } from '../hooks/useAuth';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

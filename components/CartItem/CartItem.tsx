@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { updateCart, removeCart } from '@/store/cartSlice';
+import { removeCart, updateCart } from '../../store/cartSlice';
 
 function CartItem({ data }: any) {
   const p = data.attributes;
