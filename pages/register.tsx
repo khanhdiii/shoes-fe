@@ -61,7 +61,7 @@ function Register() {
     <div className="relative flex h-screen w-screen flex-col md:items-center md:justify-center md:bg-transparent">
       <Head>
         <title>Register</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Image
         alt=""

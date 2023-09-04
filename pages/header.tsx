@@ -57,7 +57,7 @@ function Header() {
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/" onClick={() => setShowCatMenu(false)}>
-          <img src="/img/logo.svg" className="w-[40px] md:w-[60px]" alt="" />
+          <img src="/img/logo.png" className="w-[40px] md:w-[60px]" alt="" />
         </Link>
         <Menu
           showCatMenu={showCatMenu}
