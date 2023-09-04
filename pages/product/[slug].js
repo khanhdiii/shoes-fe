@@ -12,7 +12,7 @@ import { getDiscountPricePercent } from '../../utils/helper';
 import { fetchDataApi } from '../../utils/api';
 import { addToCart } from '../../store/cartSlice';
 
-const Product = ({ product, products }: any) => {
+const Product = ({ product, products }) => {
   const dispatch = useDispatch();
 
   const p = product?.data?.[0]?.attributes;
@@ -85,7 +85,7 @@ const Product = ({ product, products }: any) => {
               </div>
 
               <div id="sizesGrid" className=" grid grid-cols-3 gap-2">
-                {p?.size?.data.map((size: any, index: any) => (
+                {p?.size?.data.map((size, index) => (
                   <div
                     key={index}
                     className={`border rounded-md text-center py-3 font-medium ${
@@ -160,7 +160,7 @@ export default Product;
 
 export async function getStaticPaths() {
   const products = await fetchDataApi('/api/products?populate=*');
-  const paths = products?.data?.map((p: any) => ({
+  const paths = products?.data?.map((p) => ({
     params: {
       slug: p.attributes.slug,
     },
@@ -172,7 +172,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params: { slug } }: any) {
+export async function getStaticProps({ params: { slug } }) {
   const product = await fetchDataApi(
     `/api/products?populate=*&filters[slug][$eq]=${slug}`,
   );
