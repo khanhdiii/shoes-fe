@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import Banner from '@/components/Banner/Banner';
-import ProductCard from '@/components/ProductCard/ProductCard';
-import Recommend from '@/components/Recommend/Recommend';
-import SideBarMenu from '@/components/SideBarMenu/SideBarMenu';
-import Price from '@/components/Sidebar/Price/Price';
-import Wrapper from '@/components/Wrapper/Wrapper';
 // import useAuth from '@/hooks/useAuth';
 import { Input } from 'antd';
 
-import { fetchDataApi } from '@/utils/api';
+import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
+import Banner from '../components/Banner/Banner';
+import Wrapper from '../components/Wrapper/Wrapper';
+import Recommend from '../components/Recommend/Recommend';
+import Price from '../components/Sidebar/Price/Price';
+import ProductCard from '../components/ProductCard/ProductCard';
+import { fetchDataApi } from '../utils/api';
 
 export default function Home({ products }: any) {
   // const { user } = useAuth();

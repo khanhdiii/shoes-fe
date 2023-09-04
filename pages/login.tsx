@@ -9,11 +9,13 @@ import {
   GithubAuthProvider,
   FacebookAuthProvider,
 } from 'firebase/auth';
+
+import { auth } from '../firebase/firebase';
+import useAuth from '../hooks/useAuth';
+
 import github from '@/public/icon/Github.png';
 import google from '@/public/icon/Google.webp';
 import facebook from '@/public/icon/Facebook.png';
-import useAuth from '@/hooks/useAuth';
-import { auth } from '@/firebase/firebase';
 
 function Login() {
   const [login, setLogin] = useState(false);

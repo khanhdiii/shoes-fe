@@ -1,8 +1,8 @@
-import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
+import useAuth from '../../hooks/useAuth';
 
 const data = [
   { id: 1, name: 'Home', url: '/' },
