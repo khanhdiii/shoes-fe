@@ -62,6 +62,26 @@ function Recommend({ filterProducts }: any) {
         >
           Converse
         </button>
+        <button
+          className={`px-[20px] py-[10px] border-transparent cursor-pointer ${
+            selectedCategory === 'Converse'
+              ? 'bg-gray-400 text-white rounded-lg'
+              : 'bg-transparent border-[0.6px] border-gray-300 text-[#323232]'
+          }`}
+          onClick={() => handleFilter('New Balance')}
+        >
+          New Balance
+        </button>
+        <button
+          className={`px-[20px] py-[10px] border-transparent cursor-pointer ${
+            selectedCategory === 'Puma'
+              ? 'bg-gray-400 text-white rounded-lg'
+              : 'bg-transparent border-[0.6px] border-gray-300 text-[#323232]'
+          }`}
+          onClick={() => handleFilter('New Balance')}
+        >
+          Puma
+        </button>
       </div>
     </div>
   );
