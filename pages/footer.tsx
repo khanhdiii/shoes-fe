@@ -1,5 +1,4 @@
-import Wrapper from '@/components/Wrapper/Wrapper';
-import Link from 'next/link';
+import Wrapper from '../components/Wrapper/Wrapper';
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 

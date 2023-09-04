@@ -1,5 +1,3 @@
-import { auth } from '@/firebase/firebase';
-import useAuth from '@/hooks/useAuth';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { Form, Input, message, Row, Col, Spin } from 'antd';
 import {
@@ -10,6 +8,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+
+import { auth } from '../firebase/firebase';
+import useAuth from '../hooks/useAuth';
 
 function Register() {
   const [formRegister] = Form.useForm();

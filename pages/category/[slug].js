@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import ProductCard from '@/components/ProductCard/ProductCard';
+import Wrapper from '../../components/Wrapper/Wrapper';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
-import { fetchDataApi } from '@/utils/api';
+import { fetchDataApi } from '../../utils/api';
 
 const maxResult = 3;
 
@@ -19,7 +19,6 @@ const Category = ({ category, products, slug }) => {
       fallbackData: products,
     },
   );
-
 
   useEffect(() => {
     setPageIndex(1);

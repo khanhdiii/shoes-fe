@@ -1,15 +1,17 @@
 import React, { useMemo, useState } from 'react';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import CartItem from '@/components/CartItem/CartItem';
+import Wrapper from '../components/Wrapper/Wrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 import { message } from 'antd';
 import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
-import { makePaymentRequest } from '@/utils/api';
+import CartItem from '../components/CartItem/CartItem';
+import { makePaymentRequest } from '../utils/api';
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
 );
+
 function Cart() {
   const { cartItems } = useSelector((state: any) => state.cart);
   const [loading, setLoading] = useState(false);

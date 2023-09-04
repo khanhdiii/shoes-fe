@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import React, { useState } from 'react';
 
 function Contact() {
@@ -20,7 +21,8 @@ function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Gửi dữ liệu liên hệ đi đây, ví dụ: thông qua API hoặc xử lý ở phía máy chủ
-    console.log('Form Data:', formData);
+    // console.log('Form Data:', formData);
+    message.info('mail is send');
     // Sau khi gửi thành công, bạn có thể xử lý các thao tác tiếp theo, chẳng hạn như hiển thị thông báo thành công, v.v.
   };
 

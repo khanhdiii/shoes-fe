@@ -1,8 +1,8 @@
-import { auth } from '@/firebase/firebase';
 import { message } from 'antd';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { auth } from '../firebase/firebase';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');

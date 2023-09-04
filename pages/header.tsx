@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import Menu from '@/components/Menu/Menu';
-import MenuMobile from '@/components/MenuMobile/MenuMobile';
-import UserProfile from '@/components/UserProfile/UserProfile';
+import Wrapper from '../components/Wrapper/Wrapper';
+import Menu from '../components/Menu/Menu';
+import MenuMobile from '../components/MenuMobile/MenuMobile';
+import UserProfile from '../components/UserProfile/UserProfile';
 
-import { fetchDataApi } from '@/utils/api';
+import { fetchDataApi } from '../utils/api';
 
 import { BsCart } from 'react-icons/bs';
 import { CgMenuRight } from 'react-icons/cg';

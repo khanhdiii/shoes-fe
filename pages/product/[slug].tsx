@@ -3,17 +3,16 @@ import { useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
-import ProductDetailCarousel from '@/components/ProductDetailCarousel/ProductDetailCarousel';
-
-import { fetchDataApi } from '@/utils/api';
-import { getDiscountPricePercent } from '@/utils/helper';
-import { addToCart } from '@/store/cartSlice';
+import Wrapper from '../../components/Wrapper/Wrapper';
+import RelatedProducts from '../../components/RelatedProducts/RelatedProducts';
+import ProductDetailCarousel from '../../components/ProductDetailCarousel/ProductDetailCarousel';
 
 import { IoMdHeartEmpty } from 'react-icons/io';
+import { getDiscountPricePercent } from '../../utils/helper';
+import { fetchDataApi } from '../../utils/api';
+import { addToCart } from '../../store/cartSlice';
 
-const Product = ({ product, products }) => {
+const Product = ({ product, products }: any) => {
   const dispatch = useDispatch();
 
   const p = product?.data?.[0]?.attributes;
@@ -86,7 +85,7 @@ const Product = ({ product, products }) => {
               </div>
 
               <div id="sizesGrid" className=" grid grid-cols-3 gap-2">
-                {p?.size?.data.map((size, index) => (
+                {p?.size?.data.map((size: any, index: any) => (
                   <div
                     key={index}
                     className={`border rounded-md text-center py-3 font-medium ${
@@ -161,7 +160,7 @@ export default Product;
 
 export async function getStaticPaths() {
   const products = await fetchDataApi('/api/products?populate=*');
-  const paths = products?.data?.map((p) => ({
+  const paths = products?.data?.map((p: any) => ({
     params: {
       slug: p.attributes.slug,
     },
@@ -173,7 +172,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }: any) {
   const product = await fetchDataApi(
     `/api/products?populate=*&filters[slug][$eq]=${slug}`,
   );

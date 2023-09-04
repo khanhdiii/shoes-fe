@@ -1,6 +1,6 @@
 import React from 'react';
-import Wrapper from '@/components/Wrapper/Wrapper';
 import Link from 'next/link';
+import Wrapper from '../components/Wrapper/Wrapper';
 
 const Success = () => {
   return (
