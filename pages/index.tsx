@@ -76,6 +76,20 @@ export default function Home({ products }: any) {
           ) &&
           (searchQuery === '' || productName.includes(searchQueryLower))
         );
+      } else if (selectedCategory === 'New Balance') {
+        return (
+          product.attributes.categories.data.some(
+            (category: any) => category.attributes.name === 'New Balance',
+          ) &&
+          (searchQuery === '' || productName.includes(searchQueryLower))
+        );
+      } else if (selectedCategory === 'Puma') {
+        return (
+          product.attributes.categories.data.some(
+            (category: any) => category.attributes.name === 'Puma',
+          ) &&
+          (searchQuery === '' || productName.includes(searchQueryLower))
+        );
       } else {
         return (
           product.category === selectedCategory &&
