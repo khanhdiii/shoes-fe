@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import useAuth from '@/hooks/useAuth';
-import { Input } from 'antd';
+import { Input, Pagination } from 'antd';
 
 import SideBarMenu from '../components/SideBarMenu/SideBarMenu';
 import Banner from '../components/Banner/Banner';
@@ -19,6 +19,18 @@ export default function Home({ products }: any) {
   const [filterType, setFilterType] = useState('category');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
+
+  // Pagination
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Search
 
   const handleSearchQueryChange = (e: any) => {
     setSearchQuery(e.target.value);
@@ -152,6 +164,8 @@ export default function Home({ products }: any) {
     }
   });
 
+  const displayedProducts = filteredProducts.slice(startIndex, endIndex);
+
   useEffect(() => {
     // Update windowWidth whenever the window is resized
     const handleResize = () => {
@@ -202,8 +216,12 @@ export default function Home({ products }: any) {
             <Price filterByPriceRange={filterByPriceRange} />
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
-            {filterType === 'category' &&
+            {/* {filterType === 'category' &&
               filteredProducts.map((product: any) => (
+                <ProductCard key={product.id} data={product} />
+              ))} */}
+            {filterType === 'category' &&
+              displayedProducts.map((product: any) => (
                 <ProductCard key={product.id} data={product} />
               ))}
 
@@ -216,6 +234,13 @@ export default function Home({ products }: any) {
                 <ProductCard key={product.id} data={product} />
               ))}
           </div>
+          <Pagination
+            current={currentPage}
+            total={filteredProducts.length}
+            pageSize={itemsPerPage}
+            onChange={handlePageChange}
+            showSizeChanger={false}
+          />
         </>
         {/* ) : ( */}
         {/* <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
