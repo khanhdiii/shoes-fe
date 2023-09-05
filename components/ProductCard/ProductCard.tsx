@@ -33,8 +33,14 @@ function ProductCard({ data: { attributes: params } }: any) {
                 &#8363;
               </p>
               <p className="ml-auto text-base font-medium text-green-500">
-                {getDiscountPricePercent(params.original_price, params.price)}%
-                off
+                {parseFloat(
+                  getDiscountPricePercent(params.original_price, params.price),
+                ) >= 1
+                  ? `${getDiscountPricePercent(
+                      params.original_price,
+                      params.price,
+                    )}% off`
+                  : ''}
               </p>
             </>
           )}

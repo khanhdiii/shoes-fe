@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -137,7 +136,7 @@ const About: React.FC = () => {
             <div className="flex flex-col justify-center items-center">
               <div className="flex justify-center items-center text-black">
                 <div className="relative w-10/12 h-full flex my-10">
-                  <Image
+                  <img
                     className={`w-full justify-center items-center transition-opacity ${
                       activeSection !== section.id ? 'opacity-0' : 'opacity-100'
                     }`}

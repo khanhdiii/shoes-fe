@@ -39,9 +39,6 @@ const Footer = () => {
                 Order Status
               </div>
               <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
-                Delivery
-              </div>
-              <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">
                 Returns
               </div>
               <div className="text-sm text-white/[0.5] hover:text-white cursor-pointer">

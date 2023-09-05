@@ -234,13 +234,16 @@ export default function Home({ products }: any) {
                 <ProductCard key={product.id} data={product} />
               ))}
           </div>
-          <Pagination
-            current={currentPage}
-            total={filteredProducts.length}
-            pageSize={itemsPerPage}
-            onChange={handlePageChange}
-            showSizeChanger={false}
-          />
+          <div className="flex items-end justify-end p-2">
+            <Pagination
+              current={currentPage}
+              total={filteredProducts.length}
+              pageSize={itemsPerPage}
+              onChange={handlePageChange}
+              showSizeChanger={false}
+              responsive
+            />
+          </div>
         </>
         {/* ) : ( */}
         {/* <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">

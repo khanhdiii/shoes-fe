@@ -17,16 +17,16 @@ function SideBarMenu({ filterByPriceRange, filterBySex }: any) {
     setCollapsed(!collapsed);
   };
   return (
-    <section className="w-[170px] flex flex-col items-center fixed border-r-2 border-solid">
+    <section className="w-[200px] flex-col items-center fixed border-r-2 border-solid ml-3">
       <Button
         type="text"
         onClick={toggleCollapsed}
-        style={{ marginBottom: 16, left: 0, background: 'pink' }}
+        style={{ marginBottom: 16, left: 0, background: '#bae0ff' }}
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
-        mode="vertical"
+        mode="horizontal"
         // theme="dark"
         inlineCollapsed={collapsed}
         selectedKeys={[selectedMenuItem]}
