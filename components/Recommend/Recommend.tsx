@@ -64,7 +64,7 @@ function Recommend({ filterProducts }: any) {
         </button>
         <button
           className={`px-[20px] py-[10px] border-transparent cursor-pointer ${
-            selectedCategory === 'Converse'
+            selectedCategory === 'New Balance'
               ? 'bg-gray-400 text-white rounded-lg'
               : 'bg-transparent border-[0.6px] border-gray-300 text-[#323232]'
           }`}
@@ -78,7 +78,7 @@ function Recommend({ filterProducts }: any) {
               ? 'bg-gray-400 text-white rounded-lg'
               : 'bg-transparent border-[0.6px] border-gray-300 text-[#323232]'
           }`}
-          onClick={() => handleFilter('New Balance')}
+          onClick={() => handleFilter('Puma')}
         >
           Puma
         </button>
